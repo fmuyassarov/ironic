@@ -861,8 +861,12 @@ def skip_automated_cleaning(node):
 
     :param node: the node to consider
     """
-    return not CONF.conductor.automated_clean and not node.automated_clean
-
+    if node.automated_clean:
+        LOG.info('Automated cleaning is enabled for node %s.', node.uuid)
+        return not CONF.conductor.automated_clean and node.automated_clean
+    else:
+        LOG.info('Automated cleaning is disabled for node %s.', node.uuid)
+        return not CONF.conductor.automated_clean and not node.automated_clean
 
 def power_on_node_if_needed(task):
     """Powers on node if it is powered off and has a Smart NIC port

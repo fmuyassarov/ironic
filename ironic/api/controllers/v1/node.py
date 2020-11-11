@@ -2351,6 +2351,8 @@ class NodesController(rest.RestController):
                 policy_checks.append('baremetal:node:update_instance_info')
             elif p['path'].startswith('/extra'):
                 policy_checks.append('baremetal:node:update_extra')
+            elif p['path'].startswith('/disable_cleaning'):
+                policy_checks.append('baremetal:node:disable_cleaning')
             else:
                 generic_update = True
 
